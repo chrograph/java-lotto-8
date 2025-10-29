@@ -1,6 +1,8 @@
 package lotto;
 
-import java.util.List;
+import camp.nextstep.edu.missionutils.Randoms;
+
+import java.util.*;
 
 public class Lotto {
     private final List<Integer> numbers;
@@ -16,5 +18,5 @@ public class Lotto {
         }
     }
 
-    // TODO: 추가 기능 구현
+
 }
