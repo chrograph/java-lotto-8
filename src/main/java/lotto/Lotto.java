@@ -6,7 +6,6 @@ public class Lotto {
     private final static int LOTTO_SIZE = 6;
     private final static int LOTTO_MIN_NUMBER = 1;
     private final static int LOTTO_MAX_NUMBER = 45;
-
     private final List<Integer> numbers;
 
     public Lotto(List<Integer> numbers) {
@@ -16,9 +15,9 @@ public class Lotto {
 
     public static List<Lotto> makeLottos(int lottoQuantity) {
         List<Lotto> lottos = new ArrayList<>();
-
         for (int i = 0; i < lottoQuantity; ++i) {
             Lotto lotto = new Lotto(Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_SIZE));
+            lotto.numbers.sort(Comparator.naturalOrder());
             lottos.add(lotto);
         }
         return lottos;
