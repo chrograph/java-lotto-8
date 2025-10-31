@@ -61,9 +61,17 @@ public enum Ranking {
         System.out.println("---");
         for (Map.Entry<Ranking, Integer> entry : winningStatics.entrySet()) {
             if (entry.getKey().correctNumber != 0) {
-                System.out.println(entry.getKey().correctNumber+"개 일치 ("+entry.getKey().prizeMoney+") - "+entry.getValue()+"개");
+                System.out.println(entry.getKey().correctNumber+"개 일치 ("+entry.getKey().prizeMoney+"원) - "+entry.getValue()+"개");
             }
         }
+    }
+
+    public static double getProfitRate(Map<Ranking, Integer> winningStatics, String purchaseAmount) {
+        double profit = 0.0;
+        for (Map.Entry<Ranking, Integer> entry : winningStatics.entrySet()) {
+            profit += Integer.parseInt((entry.getKey().prizeMoney.replace(",",""))) * entry.getValue();
+        }
+        return (profit / Integer.parseInt(purchaseAmount));
     }
 
 }

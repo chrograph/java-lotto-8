@@ -21,8 +21,9 @@ public class Application {
         Map<Ranking, Integer> winningStatics = Ranking.getWinningStatics(lottos, winningNumber, bonusNumber);
         Ranking.printWinningStatics(winningStatics);
 
-
-    }
+        double profitRate = Ranking.getProfitRate(winningStatics, purchaseAmount) * 100;
+        System.out.println("총 수익률은 "+ String.format("%.1f",profitRate) +"%입니다.");
+   }
 
     private static List<Integer> getWinningNumber() {
         System.out.println("당첨 번호를 입력해 주세요.");
@@ -41,4 +42,5 @@ public class Application {
         System.out.println(lottoQuantity +"개를 구매했습니다.");
         return lottoQuantity;
     }
+
 }
