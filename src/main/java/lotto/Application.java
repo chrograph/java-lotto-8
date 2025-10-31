@@ -5,6 +5,14 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
     public static void main(String[] args) {
+        try{
+            run();
+        }catch(IllegalArgumentException error){
+            System.out.println(error.getMessage());
+        }
+    }
+
+    public static void run() {
         String purchaseAmount = getPurchaseAmount();
 
         List<Lotto> lottos = Lotto.makeLottos(getLottoQuantity(purchaseAmount));
@@ -27,8 +35,18 @@ public class Application {
         System.out.println("구입금액을 입력해 주세요.");
         String purchaseAmount = Console.readLine();
         System.out.println();
+        checkPurchaseAmount(purchaseAmount);
 
         return purchaseAmount;
+    }
+
+    private static void checkPurchaseAmount(String purchaseAmount) {
+        if (purchaseAmount == null || purchaseAmount.isBlank()) {
+            throw new IllegalArgumentException("[ERROR] 값을 입력하지 않았습니다.");
+        }
+        if (!purchaseAmount.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException("[ERROR] 문자가 입력되었습니다.");
+        }
     }
 
 
