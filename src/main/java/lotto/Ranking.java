@@ -60,8 +60,11 @@ public enum Ranking {
         System.out.println("당첨 통계");
         System.out.println("---");
         for (Map.Entry<Ranking, Integer> entry : winningStatics.entrySet()) {
-            if (entry.getKey().correctNumber != 0) {
-                System.out.println(entry.getKey().correctNumber+"개 일치 ("+entry.getKey().prizeMoney+"원) - "+entry.getValue()+"개");
+            if (entry.getKey().correctNumber != 0 && entry.getKey() != Ranking.SECOND) {
+                System.out.println(entry.getKey().correctNumber + "개 일치 (" + entry.getKey().prizeMoney + "원) - " + entry.getValue() + "개");
+            }
+            if (entry.getKey() == Ranking.SECOND) {
+                System.out.println(entry.getKey().correctNumber + "개 일치, 보너스 볼 일치 (" + entry.getKey().prizeMoney + "원) - " + entry.getValue() + "개");
             }
         }
     }
