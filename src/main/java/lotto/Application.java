@@ -1,7 +1,6 @@
 package lotto;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Application {
@@ -17,11 +16,16 @@ public class Application {
 
         System.out.println("보너스 번호를 입력해 주세요.");
         int bonusNumber = Integer.parseInt(Console.readLine());
+        System.out.println();
+
+        Map<Ranking, Integer> winningStatics = Ranking.getWinningStatics(lottos, winningNumber, bonusNumber);
+        Ranking.printWinningStatics(winningStatics);
     }
 
     private static List<Integer> getWinningNumber() {
         System.out.println("당첨 번호를 입력해 주세요.");
         String InputWinningNumber = Console.readLine();
+        System.out.println();
 
         List<Integer> winningNumber = new ArrayList<>();
         for (String number : InputWinningNumber.split(",")) {

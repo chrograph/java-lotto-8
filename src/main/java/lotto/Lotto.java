@@ -27,6 +27,7 @@ public class Lotto {
         for (Lotto lotto : lottos) {
             System.out.println(lotto.numbers);
         }
+        System.out.println();
     }
 
     private void validate(List<Integer> numbers) {
@@ -34,4 +35,9 @@ public class Lotto {
             throw new IllegalArgumentException("[ERROR] 로또 번호는 6개여야 합니다.");
         }
     }
+
+    public List<Integer> getNumbers() {
+        return numbers;
+    }
+
 }
