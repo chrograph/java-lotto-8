@@ -3,21 +3,19 @@ package lotto;
 import java.util.*;
 
 public enum Ranking {
-    NONE(0, "0", false),
-    FIFTH(3,"5,000",false),
-    FOURTH(4,"50,000",false),
-    THIRD(5,"1,500,000",false),
-    SECOND(5,"30,000,000",true),
-    FIRST(6, "2,000,000,000", false);
+    NONE(0, "0"),
+    FIFTH(3,"5,000"),
+    FOURTH(4,"50,000"),
+    THIRD(5,"1,500,000"),
+    SECOND(5,"30,000,000"),
+    FIRST(6, "2,000,000,000");
 
     private final int correctNumber;
     private final String prizeMoney;
-    private final boolean bonusBall;
 
-    Ranking(int correctNumber, String prizeMoney, boolean bonusBall) {
+    Ranking(int correctNumber, String prizeMoney) {
         this.correctNumber = correctNumber;
         this.prizeMoney = prizeMoney;
-        this.bonusBall = bonusBall;
     }
 
     public static Map<Ranking, Integer> getWinningStatics(List<Lotto> lottos, List<Integer> winningNumber, int bonusNumber) {
@@ -38,14 +36,24 @@ public enum Ranking {
 
     public static Ranking matchRanks(long matchCount,boolean bonusNumberContain) {
         for (Ranking rank : values()) {
-            if (rank.correctNumber == matchCount && rank.bonusBall && bonusNumberContain) {
-                return rank;
+            if (matchCount == rank.correctNumber && matchCount == 5) {
+                return distributeSecond(bonusNumberContain);
             }
-            if (rank.correctNumber == matchCount && !rank.bonusBall) {
+            if (matchCount == rank.correctNumber) {
                 return rank;
             }
         }
         return Ranking.NONE;
+    }
+
+    private static Ranking distributeSecond(boolean bonusNumberContain) {
+        if (bonusNumberContain == true) {
+            return Ranking.SECOND;
+        }
+        if (bonusNumberContain == false) {
+            return Ranking.THIRD;
+        }
+        throw new IllegalArgumentException();
     }
 
     public static void printWinningStatics(Map<Ranking, Integer> winningStatics) {

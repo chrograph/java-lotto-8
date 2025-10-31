@@ -20,6 +20,8 @@ public class Application {
 
         Map<Ranking, Integer> winningStatics = Ranking.getWinningStatics(lottos, winningNumber, bonusNumber);
         Ranking.printWinningStatics(winningStatics);
+
+
     }
 
     private static List<Integer> getWinningNumber() {
