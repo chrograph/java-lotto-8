@@ -20,9 +20,7 @@ public class Application {
 
         List<Integer> winningNumber = getWinningNumber();
 
-        System.out.println("보너스 번호를 입력해 주세요.");
-        int bonusNumber = Integer.parseInt(Console.readLine());
-        System.out.println();
+        int bonusNumber = getBonusNumber();
 
         Map<Ranking, Integer> winningStatics = Ranking.getWinningStatics(lottos, winningNumber, bonusNumber);
         Ranking.printWinningStatics(winningStatics);
@@ -47,6 +45,17 @@ public class Application {
         if (!purchaseAmount.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException("[ERROR] 문자가 입력되었습니다.");
         }
+        if ((Integer.parseInt(purchaseAmount) / 1000) == 0) {
+            throw new IllegalArgumentException("[ERROR] 금액이 1000원 미만입니다.");
+        }
+    }
+
+    private static int getBonusNumber() {
+        System.out.println("보너스 번호를 입력해 주세요.");
+        int bonusNumber = Integer.parseInt(Console.readLine());
+        System.out.println();
+
+        return bonusNumber;
     }
 
 
