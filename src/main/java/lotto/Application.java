@@ -33,21 +33,25 @@ public class Application {
         System.out.println("구입금액을 입력해 주세요.");
         String purchaseAmount = Console.readLine();
         System.out.println();
-        checkPurchaseAmount(purchaseAmount);
+        checkPurchaseAmountException(purchaseAmount);
 
         return purchaseAmount;
     }
 
-    private static void checkPurchaseAmount(String purchaseAmount) {
-        if (purchaseAmount == null || purchaseAmount.isBlank()) {
+    private static void commonInputException(String inputValue) {
+        if (inputValue == null || inputValue.isBlank()) {
             throw new IllegalArgumentException("[ERROR] 값을 입력하지 않았습니다.");
         }
-        if (!purchaseAmount.chars().allMatch(Character::isDigit)) {
+        if (!inputValue.chars().allMatch(Character::isDigit)) {
             throw new IllegalArgumentException("[ERROR] 문자가 입력되었습니다.");
         }
+    }
+
+    private static void checkPurchaseAmountException(String purchaseAmount) {
         if ((Integer.parseInt(purchaseAmount) / 1000) == 0) {
             throw new IllegalArgumentException("[ERROR] 금액이 1000원 미만입니다.");
         }
+        commonInputException(purchaseAmount);
     }
 
     private static int getBonusNumber() {
