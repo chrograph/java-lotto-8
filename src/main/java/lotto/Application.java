@@ -20,7 +20,7 @@ public class Application {
 
         List<Integer> winningNumber = getWinningNumber();
 
-        int bonusNumber = getBonusNumber();
+        int bonusNumber = getBonusNumber(winningNumber);
 
         Map<Ranking, Integer> winningStatics = Ranking.getWinningStatics(lottos, winningNumber, bonusNumber);
         Ranking.printWinningStatics(winningStatics);
@@ -54,14 +54,21 @@ public class Application {
         commonInputException(purchaseAmount);
     }
 
-    private static int getBonusNumber() {
+    private static int getBonusNumber(List<Integer> winningNumber) {
         System.out.println("보너스 번호를 입력해 주세요.");
-        int bonusNumber = Integer.parseInt(Console.readLine());
+        String bonusNumber = Console.readLine();
+        checkBonusNumberException(bonusNumber, winningNumber);
         System.out.println();
 
-        return bonusNumber;
+        return Integer.parseInt(bonusNumber);
     }
 
+    private static void checkBonusNumberException(String bonusNumber, List<Integer> winningNumber) {
+        commonInputException(bonusNumber);
+        if (winningNumber.contains(bonusNumber)) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호랑 중복된 입력입니다.");
+        }
+    }
 
     private static List<Integer> getWinningNumber() {
         System.out.println("당첨 번호를 입력해 주세요.");
@@ -72,7 +79,18 @@ public class Application {
         for (String number : InputWinningNumber.split(",")) {
             winningNumber.add(Integer.parseInt(number));
         }
+
         return winningNumber;
+    }
+
+    private static void checkWinningNumberException(List<Integer> winningNumber) {
+        if (winningNumber.size() != 6) {
+            throw new IllegalArgumentException("[ERROR] 당첨 번호는 6개여야 합니다.");
+        }
+        if (winningNumber.stream().distinct().count() != 0) {
+            throw new IllegalArgumentException("[ERROR] 중복된 당첨 번호가 입력되었습니다.");
+        }
+        commonInputException(winningNumber.toString());
     }
 
     private static int getLottoQuantity(String purchaseAmount) {
