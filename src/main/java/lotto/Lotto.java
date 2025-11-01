@@ -16,9 +16,11 @@ public class Lotto {
     public static List<Lotto> makeLottos(int lottoQuantity) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < lottoQuantity; ++i) {
-            Lotto lotto = new Lotto(Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_SIZE));
-            lotto.numbers.sort(Comparator.naturalOrder());
-            lottos.add(lotto);
+            List<Integer> lotto = Randoms.pickUniqueNumbersInRange(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER, LOTTO_SIZE);
+            List<Integer> sortedLotto = new ArrayList<>(lotto);
+
+            Collections.sort(sortedLotto);
+            lottos.add(new Lotto(sortedLotto));
         }
         return lottos;
     }
