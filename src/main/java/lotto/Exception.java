@@ -21,7 +21,7 @@ public class Exception {
 
     public static void checkBonusNumber(String bonusNumber, List<Integer> winningNumber) {
         checkCommonInput(bonusNumber);
-        if (winningNumber.contains(bonusNumber)) {
+        if (winningNumber.contains(Integer.parseInt(bonusNumber))) {
             throw new IllegalArgumentException("[ERROR] 당첨 번호랑 중복된 입력입니다.");
         }
     }
