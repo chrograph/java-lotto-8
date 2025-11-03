@@ -8,11 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 class RankingTest {
-
-    @Test
-    void getWinningStatics() {
-    }
-
     @Test
     @DisplayName("5개 일치 + 보너스 번호 일치 시 SECOND 반환")
     void matchRanks() {
@@ -23,9 +18,5 @@ class RankingTest {
         //when && then
         Ranking result = Ranking.matchRanks(matchCount, bonusNumberContains);
         assertThat(result).isEqualTo(Ranking.SECOND);
-    }
-
-    @Test
-    void printWinningStatics() {
     }
 }
