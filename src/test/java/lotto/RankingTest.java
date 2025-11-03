@@ -20,10 +20,8 @@ class RankingTest {
         long matchCount = 5;
         Boolean bonusNumberContains = true;
 
-        //when
+        //when && then
         Ranking result = Ranking.matchRanks(matchCount, bonusNumberContains);
-
-        //then
         assertThat(result).isEqualTo(Ranking.SECOND);
     }
 
